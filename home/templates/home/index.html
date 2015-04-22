@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Funguje to</title>
+	</head>
+	<body>
+		{% if video_list %}
+			<ul>
+				{% for video in video_list %}
+					<li>{{video.name}}</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>Nemáme žádný videa</p>
+		{% endif %}
+	</body>
+</html>
