@@ -15,9 +15,10 @@
 			<div id="content">
 				<div id="header">
 					<div id="search">
-						<form method="post">
-						<input type="text" size="30" name="question" placeholder="Zadejte hledaný výraz..."/>
-						<input type="submit" name="search" value="Vyhledat"/>
+						<form action="{% url 'search' %}">
+							{% csrf_token %}
+							{{ searchform.term }}
+							<input name="search" type="submit" value="Hledat" />
 						</form>
 					</div>
 				</div>

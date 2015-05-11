@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+	{{ video.name }}
+{% endblock %}
+
+{% block content %}
+	<h2>{{ video.name }}</h2>
+	{# video jde nějak sem #} {{ video.file }}
+	<p>{{ video.description }}</p>
+	
+	{# no a ještě commenty a comment form jde sem #}
+{% endblock %}
