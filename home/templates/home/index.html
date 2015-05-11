@@ -1,10 +1,12 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 
 <html>
 	<head>
 		<title>MULTube</title>
-		<link rel="stylesheet" href="../css/style.css" type="text/css"/>
-		<script type="text/javascript" src="../js/jwplayer.js"></script>
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+		<script type="text/javascript" src="{% static 'js/jwplayer.js' %}"></script>
 	</head>
 	<body>
 		<div id="view">
@@ -39,7 +41,7 @@
 		{% endif %}
 		</div>
 		<div id="footer">
-			© Zdeněk Biberle (xbiber00) &amp; Josef Řídký (xridky00)
+			&copy; Zdeněk Biberle (xbiber00) &amp; Josef Řídký (xridky00)
 			<br> projekt do předmětu MUL
 		</div>
 		</div>
