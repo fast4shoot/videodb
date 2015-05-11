@@ -1,0 +1,12 @@
+{% if comment_list %}
+	<ul class="list">
+		{% for comment in comment_list %}
+			<li>
+				<a href="{% url 'profile' comment.user.id %}" class="user-link">{{ comment.user.username }}</a> napsal:
+				<p>{{ comment.text }}</p>
+			</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p style="text-align: center">{{ empty_msg }}</p>
+{% endif %}

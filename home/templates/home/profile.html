@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+	<h2>{% block title %}Profil uživatele {{ profile.username }}{% endblock %}</h2>
+
+	<h3>Nahraná videa</h3>
+	{% include "home/video_list.html" with video_list=videos empty_msg="Žádná nahraná videa" %}
+	
+	<h3>Poslední komentáře</h3>
+	{% include "home/comment_list.html" with comment_list=comments empty_msg="Žádné komentáře" %}
+{% endblock %}

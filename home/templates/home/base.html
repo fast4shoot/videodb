@@ -27,7 +27,7 @@
 						<h3> Hlavní menu </h3>
 						<ul>
 							<li><a href="{% url 'index' %}">Domů</a></li>
-							<li><a href="{% url 'index' %}">Tagy</a></li>
+							<li><a href="{% url 'tags' %}">Tagy</a></li>
 							{% if user.is_authenticated %}
 								<li><a href="{% url 'upload' %}">Nahrát video</a></li>
 								<li><a href="{% url 'upload' %}">Můj profil</a></li>

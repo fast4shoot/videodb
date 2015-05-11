@@ -2,8 +2,8 @@
 	<ul class="list">
 		{% for video in video_list %}
 			<li>
-				<img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/>
-				{{video.name}}
+				<a href="{% url 'video' video.id %}"><img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/></a>
+				<a href="{% url 'video' video.id %}">{{video.name}}</a>
 			</li>
 		{% endfor %}
 	</ul>

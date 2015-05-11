@@ -6,8 +6,17 @@
 
 {% block content %}
 	<h2>{{ video.name }}</h2>
-	{# video jde nějak sem #} {{ video.file }}
+	{# video jde nějak sem #} {{ video.get_video_url }}
 	<p>{{ video.description }}</p>
 	
-	{# no a ještě commenty a comment form jde sem #}
+	<h3>Tagy</h3>
+	{% include 'home/tag_list.html' with tag_list=tags %}
+	
+	<form action="{% url 'video' video.id %}" method="post">
+		{% csrf_token %}
+		{{ commentform }}
+		<input type="submit" value="Komentovat"/>
+	</form>
+	
+	{% include "home/comment_list.html" with comment_list=comments empty_msg="K tomuto videu nejsou žádné komentáře" %}
 {% endblock %}

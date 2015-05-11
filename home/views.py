@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.db.models import Count
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.conf import settings
 from . import models
 from . import forms
@@ -69,13 +70,33 @@ def upload(request):
 	return render(request, "home/upload.html", context)
 
 def video(request, video_id):
-	commentform = forms.CommentForm()
 	video = get_object_or_404(models.Video, id = video_id)
+	commentform = None
+	if 'comment' in request.POST:
+		commentform = forms.CommentForm(request.POST)
+		if commentform.is_valid():
+			text = commentform.cleaned_data['comment']
+			comment = models.Comment(text = text, user = request.user)
+			video.comments.add(comment)
+			comment.save()
+			return redirect('video', video_id = video_id)
+	else:
+		commentform = forms.CommentForm()
+		
 	context = {
 		"video": video,
+		"comments": video.comments.all(),
+		"tags": video.tags.all(),
 		"commentform": commentform,
 	}
 	return render(request, "home/video.html", context)
+
+def tags(request):
+	top_tags = models.Tag.objects.annotate(num_videos = Count("video")).order_by("-num_videos")[:50]
+	context = {
+		"top_tags": top_tags,
+	}
+	return render(request, "home/tags.html", context)
 
 def tag(request, tag_name):
 	tag = get_object_or_404(models.Tag, name = tag_name)
@@ -84,6 +105,16 @@ def tag(request, tag_name):
 		"videos": tag.videos.all(),
 	}
 	return render(request, "home/tag.html", context)
+
+def profile(request, user_id):
+	user = get_object_or_404(auth.models.User, pk = user_id)
+	context = {
+		"profile": user,
+		"videos": user.videos.all(),
+		"comments": user.comments.all()[:25],
+	}
+	return render(request, "home/profile.html", context)
+	
 
 def process_video(path, video_id):
 	try:
