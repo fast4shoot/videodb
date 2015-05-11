@@ -15,12 +15,14 @@
 	<h3>Tagy</h3>
 	{% include 'home/tag_list.html' with tag_list=tags %}
 	
+	{% if user.is_authenticated %}
 	<h3>Komentovat</h3>
 	<form action="{% url 'video' video.id %}" method="post">
 		{% csrf_token %}
 		{{ commentform }}
 		<input type="submit" value="Komentovat"/>
 	</form>
+	{% endif %}
 	
 	<h3>Komentáře</h3>
 	{% include "home/comment_list.html" with comment_list=comments empty_msg="K tomuto videu nejsou žádné komentáře" %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages, auth
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from . import models
 from . import forms
 from . import utils
@@ -27,6 +28,7 @@ def search(request):
 	
 	return render(request, "home/search.html", context)
 
+@login_required
 def upload(request):
 	if request.method == "POST":
 		uploadform = forms.UploadForm(request.POST, request.FILES)
@@ -72,7 +74,7 @@ def upload(request):
 def video(request, video_id):
 	video = get_object_or_404(models.Video, id = video_id)
 	commentform = None
-	if request.method == "POST":
+	if request.method == "POST": # kontrolovat prihlasenost uzivatele
 		commentform = forms.CommentForm(request.POST)
 		if commentform.is_valid():
 			text = commentform.cleaned_data['comment']
@@ -85,7 +87,7 @@ def video(request, video_id):
 		
 	context = {
 		"video": video,
-		"comments": video.comments.all(),
+		"comments": video.comments.order_by("-datetime"),
 		"tags": video.tags.all(),
 		"commentform": commentform,
 	}

@@ -2,7 +2,7 @@
 	<ul class="list">
 		{% for comment in comment_list %}
 			<li>
-				<a href="{% url 'profile' comment.user.id %}" class="user-link">{{ comment.user.username }}</a> napsal:
+				{{ comment.datetime }} - <a href="{% url 'profile' comment.user.id %}" class="user-link">{{ comment.user.username }}</a> napsal:
 				<p>{{ comment.text }}</p>
 			</li>
 		{% endfor %}
