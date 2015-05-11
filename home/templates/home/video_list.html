@@ -1,0 +1,12 @@
+{% if video_list %}
+	<ul class="list">
+		{% for video in video_list %}
+			<li>
+				<img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/>
+				{{video.name}}
+			</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p style="text-align: center">{{ empty_msg }}</p>
+{% endif %}

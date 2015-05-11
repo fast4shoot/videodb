@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+	Tag {{ tag.name }}
+{% endblock %}
+
+{% block content %}
+	{% if tag.description %}
+		<p class="tag-description">tag.description</p>
+	{% endif %}
+
+	{% include 'home/video_list.html' with video_list=videos empty_msg='Tento tag nemá žádná videa' %}
+{% endblock %}

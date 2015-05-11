@@ -4,13 +4,5 @@
 	Index
 {% endblock %}
 {% block content %}
-	{% if video_list %}
-		<ul class="list">
-			{% for video in video_list %}
-				<li>{{video.name}}</li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<p style="text-align: center">Nemáme žádný videa</p>
-	{% endif %}
+	{% include "home/video_list.html" with video_list=videos empty_msg="Nic tu není" %}
 {% endblock %}

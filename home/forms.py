@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import auth
 
 class SearchForm(forms.Form):
 	term = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Zadejte hledaný výraz', 'size': '30'}))

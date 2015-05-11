@@ -26,10 +26,15 @@
 					<div id="left">
 						<h3> Hlavní menu </h3>
 						<ul>
-							<li> text 1 </li>
-							<li> text 1 </li>
-							<li> text 1 </li>
-							<li> text 1 </li>
+							<li><a href="{% url 'index' %}">Domů</a></li>
+							<li><a href="{% url 'index' %}">Tagy</a></li>
+							{% if user.is_authenticated %}
+								<li><a href="{% url 'upload' %}">Nahrát video</a></li>
+								<li><a href="{% url 'upload' %}">Můj profil</a></li>
+								<li><a href="{% url 'logout' %}">Odhlásit</a></li>
+							{% else %}
+								<li><a href="{% url 'login' %}">Přihlásit</a></li>
+							{% endif %}
 						</ul>
 					</div>
 					<div id="text">
