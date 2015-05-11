@@ -1,0 +1,45 @@
+{# tohle je základní template, ostatní od něj dědí a vkládají do něj svůj content #}
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>MULTube - {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+		<script type="text/javascript" src="{% static 'js/jwplayer.js' %}"></script>
+	</head>
+	<body>
+		<div id="view">
+			<div id="content">
+				<div id="header">
+					<div id="search">
+						<form method="post">
+						<input type="text" size="30" name="question" placeholder="Zadejte hledaný výraz..."/>
+						<input type="submit" name="search" value="Vyhledat"/>
+						</form>
+					</div>
+				</div>
+				<div id="text-wrapper">
+					<div id="left">
+						<h3> Hlavní menu </h3>
+						<ul>
+							<li> text 1 </li>
+							<li> text 1 </li>
+							<li> text 1 </li>
+							<li> text 1 </li>
+						</ul>
+					</div>
+					<div id="text">
+						{% block content %}{% endblock %}
+					</div>
+					<div id="footer">
+						&copy; Zdeněk Biberle (xbiber00) &amp; Josef Řídký (xridky00)
+						<br> projekt do předmětu MUL
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -8,3 +8,4 @@ def index(request):
 		"video_list" : video_list,
 	}
 	return render(request, "home/index.html", context)
+

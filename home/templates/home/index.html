@@ -1,51 +1,16 @@
-{% load staticfiles %}
+{% extends 'home/base.html' %}
 
-<!DOCTYPE html>
-
-<html>
-	<head>
-		<title>MULTube</title>
-		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
-		<script type="text/javascript" src="{% static 'js/jwplayer.js' %}"></script>
-	</head>
-	<body>
-		<div id="view">
-		<div id="content">
-		<div id="header">
-			<div id="search">
-				<form method="post">
-				<input type="text" size="30" name="question" placeholder="Zadejte hledaný výraz..."/>
-				<input type="submit" name="search" value="Vyhledat"/>
-				</form>
-			</div>
-		</div>
-		<div id="text-wrapper">
-		<div id="left">
-				<h3> Hlavní menu </h3>
-				<ul>
-					<li> text 1 </li>
-					<li> text 1 </li>
-					<li> text 1 </li>
-					<li> text 1 </li>
-				</ul>
-		</div>
-		<div id="text">
-		{% if video_list %}
-			<ul class="list">
-				{% for video in video_list %}
-					<li>{{video.name}}</li>
-				{% endfor %}
-			</ul>
-		{% else %}
-			<p style="text-align: center">Nemáme žádný videa</p>
-		{% endif %}
-		</div>
-		<div id="footer">
-			&copy; Zdeněk Biberle (xbiber00) &amp; Josef Řídký (xridky00)
-			<br> projekt do předmětu MUL
-		</div>
-		</div>
-		</div>
-		</div>
-	</body>
-</html>
+{% block title %}
+	Index
+{% endblock %}
+{% block content %}
+	{% if video_list %}
+		<ul class="list">
+			{% for video in video_list %}
+				<li>{{video.name}}</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p style="text-align: center">Nemáme žádný videa</p>
+	{% endif %}
+{% endblock %}
