@@ -6,6 +6,7 @@ class Tag(models.Model):
 	description = models.TextField()
 
 class Video(models.Model):
+	user = models.ForeignKey(User, related_name = "videos", related_query_name = "video")
 	name = models.CharField(max_length = 256)
 	description = models.TextField()
 	file = models.FileField()
@@ -14,6 +15,7 @@ class Video(models.Model):
 	upvotes = models.IntegerField(default = 0)
 
 class Comment(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User, related_name = "comments", related_query_name = "comment")
+	video = models.ForeignKey(Video, related_name = "comments", related_query_name = "comment")
 	text = models.TextField()
 	upvotes = models.IntegerField(default = 0)

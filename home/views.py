@@ -9,8 +9,15 @@ def index(request):
 	return render(request, "home/index.html", context)
 
 def search(request):
-	# najít výsledky a zobrazit
-	return render(request, "home/search.html", {})
+	searchform = forms.SearchForm(request.GET)
+	if searchform.is_valid():
+		term = searchform.cleaned_data['term']
+		video_list = models.Video.objects.get(name__icontains = term)
+		context = {"video_list": video_list}
+	else:
+		context = {}
+	
+	return render(request, "home/search.html", context)
 
 def upload(request):
 	if request.method == "POST":
