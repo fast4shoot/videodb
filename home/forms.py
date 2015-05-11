@@ -12,3 +12,8 @@ class UploadForm(forms.Form):
 
 class CommentForm(forms.Form):
 	comment = forms.CharField(min_length = 10)
+
+class RegisterForm(forms.Form):
+	username = forms.CharField(max_length = 30, min_length = 1)
+	email = forms.EmailField()
+	password = forms.CharField()

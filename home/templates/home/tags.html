@@ -1,9 +1,6 @@
 {% extends 'home/base.html' %}
 
-{% block title %}
-	Populární tagy
-{% endblock %}
-
 {% block content %}
+	<h2>{% block title %}Populární tagy{% endblock %}</h2>
 	{% include 'home/tag_list.html' with tag_list=top_tags %}
 {% endblock %}

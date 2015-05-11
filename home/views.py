@@ -12,7 +12,7 @@ import threading
 import json
 
 def index(request):
-	videos = models.Video.objects.filter(state = models.Video.PROCESSED).order_by("-upvotes")[:25]
+	videos = models.Video.objects.filter(state = models.Video.PROCESSED).order_by("-datetime")[:25]
 	context = {"videos": videos,}
 	return render(request, "home/index.html", context)
 
@@ -72,7 +72,7 @@ def upload(request):
 def video(request, video_id):
 	video = get_object_or_404(models.Video, id = video_id)
 	commentform = None
-	if 'comment' in request.POST:
+	if request.method == "POST":
 		commentform = forms.CommentForm(request.POST)
 		if commentform.is_valid():
 			text = commentform.cleaned_data['comment']
@@ -110,11 +110,29 @@ def profile(request, user_id):
 	user = get_object_or_404(auth.models.User, pk = user_id)
 	context = {
 		"profile": user,
-		"videos": user.videos.all(),
-		"comments": user.comments.all()[:25],
+		"videos": user.videos.order_by("-datetime"),
+		"comments": user.comments.order_by("-datetime")[:25],
 	}
 	return render(request, "home/profile.html", context)
+
+def register(request):
+	registerform = None
+	if request.method == "POST":
+		registerform = forms.RegisterForm(request.POST)
+		if registerform.is_valid():
+			username = registerform.cleaned_data["username"]
+			password = registerform.cleaned_data["password"]
+			email = registerform.cleaned_data["email"]
+			
+			auth.models.User.objects.create_user(username, email, password)
+			user = auth.authenticate(username = username, password = password)
+			auth.login(request, user)
+			messages.info(request, "Uživatelský účet byl vytvořen.")
+			return redirect('index')
+	else:
+		registerform = forms.RegisterForm()
 	
+	return render(request, "registration/register.html", {"form": registerform})
 
 def process_video(path, video_id):
 	try:

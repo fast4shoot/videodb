@@ -2,6 +2,28 @@ body{
 	margin: 0px;
 	padding: 0px;
 	background: #BBB;
+	font-family: Arial, sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #0091c0;
+}
+
+a:hover {
+	color: #00baf6;
+}
+
+a.tag-link {
+	border: 1px solid #0091c0;
+	border-radius: 4px;
+	padding: 3px;
+	margin: 3px 0 3px 0;
+}
+
+a.tag-link:hover {
+	background: #0091c0;
+	color: white;
 }
 
 #view{
@@ -55,8 +77,11 @@ body{
 
 #left li:hover{
 	background: #4CB2D3;
+	text-shadow: 0px 0px 1px white;
+}
+
+#left li:hover a {
 	color: white;
-	text-shadow: 0px 0px 1px black;
 }
 
 #text{
@@ -81,8 +106,45 @@ body{
 .list li{
 	height: 50px;
 	border-bottom: 1px solid #888;
-	padding: 10px 15px;
+	padding: 10px 10px;
 	list-style: none;
+}
+
+.video-list{
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #888;
+}
+
+.video-list li{
+	height: 150px;
+	border-bottom: 1px solid #888;
+	padding: 10px 10px;
+	list-style: none;
+}
+
+.video-list li img {
+	float: left;
+	padding: 0 10px 0 0;
+}
+
+.video-list li .video-name {
+	font-size: 150%;
+	font-weight: 700;
+}
+
+.video-list li .video-description {
+	margin: 10px 0 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.video-list li .video-author {
+	margin: 10px 0 0 0;
+}
+
+.video-list li .video-tags {
+	margin: 10px 0 10px 0;
 }
 
 #footer{

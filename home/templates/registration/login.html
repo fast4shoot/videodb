@@ -2,8 +2,10 @@
 
 {% block content %}
 
+<h3>{% block title %}Přihlášení{% endblock %}</h3>
+
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Kombinace jména a hesla nebyla nalezena.</p>
 {% endif %}
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">

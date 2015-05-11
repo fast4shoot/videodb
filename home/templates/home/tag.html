@@ -1,10 +1,7 @@
 {% extends 'home/base.html' %}
 
-{% block title %}
-	Tag {{ tag.name }}
-{% endblock %}
-
 {% block content %}
+	<h2>{% block title %}Videa s tagem &quot;{{ tag.name }}&quot;{% endblock %}</h2>
 	{% if tag.description %}
 		<p class="tag-description">tag.description</p>
 	{% endif %}

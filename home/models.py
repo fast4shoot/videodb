@@ -15,7 +15,7 @@ class Video(models.Model):
 	PROCESSED = "P"
 	PROCESSING_ERROR = "E"
 	STATE_CHOICES = (
-		(UPLOADED, "Zpracovává se"),
+		(UPLOADED, "Čeká na zpracování"),
 		(PREPROCESSED, "Zpracovává se"),
 		(PROCESSED, "Zpracováno"),
 		(PROCESSING_ERROR, "Chyba zpracování"),
@@ -35,6 +35,9 @@ class Video(models.Model):
 	
 	def get_thumbnail_urls(self):
 		return [settings.MEDIA_URL + "{0}.{1}.jpg".format(self.id, i) for i in range(3)]
+	
+	def is_processed(self):
+		return self.state == Video.PROCESSED
 
 
 class Comment(models.Model):

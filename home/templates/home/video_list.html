@@ -1,9 +1,13 @@
 {% if video_list %}
-	<ul class="list">
+	<ul class="video-list">
 		{% for video in video_list %}
 			<li>
 				<a href="{% url 'video' video.id %}"><img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/></a>
-				<a href="{% url 'video' video.id %}">{{video.name}}</a>
+				<div class="video-name"><a href="{% url 'video' video.id %}">{{ video.name }}</a></div>
+				<div class="video-description">{{ video.description }}</div>
+				<div class="video-author">{{ video.datetime }} nahrál <a href="{% url 'profile' video.user.id %}">{{ video.user.username }}</a></div>
+				<div class="video-tags">{% include 'home/tag_list.html' with tag_list=video.tags.all %}</div>
+				{% if not video.is_processed %}<div class="video-state">{{ video.get_state_display }}</div>{% endif %}
 			</li>
 		{% endfor %}
 	</ul>

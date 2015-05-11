@@ -6,17 +6,22 @@
 
 {% block content %}
 	<h2>{{ video.name }}</h2>
-	{# video jde nějak sem #} {{ video.get_video_url }}
+	 <video width="720" height="405" controls>
+		<source src="{{ video.get_video_url }}" type="video/webm">
+		Váš prohlížeč bohužel nepodporuje přehrávání videí.
+	</video> 
 	<p>{{ video.description }}</p>
-	
+	<p>{{ video.datetime }} nahrál <a href="{% url 'profile' video.user.id %}">{{ video.user.username }}</a></p>
 	<h3>Tagy</h3>
 	{% include 'home/tag_list.html' with tag_list=tags %}
 	
+	<h3>Komentovat</h3>
 	<form action="{% url 'video' video.id %}" method="post">
 		{% csrf_token %}
 		{{ commentform }}
 		<input type="submit" value="Komentovat"/>
 	</form>
 	
+	<h3>Komentáře</h3>
 	{% include "home/comment_list.html" with comment_list=comments empty_msg="K tomuto videu nejsou žádné komentáře" %}
 {% endblock %}

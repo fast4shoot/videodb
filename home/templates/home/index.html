@@ -1,9 +1,6 @@
 {% extends 'home/base.html' %}
 
-{% block title %}
-	Index
-{% endblock %}
 {% block content %}
-	<h2>Poslední videa</h2>
+	<h2>{% block title %}Nejnovější videa{% endblock %}</h2>
 	{% include "home/video_list.html" with video_list=videos empty_msg="Nic tu není" %}
 {% endblock %}

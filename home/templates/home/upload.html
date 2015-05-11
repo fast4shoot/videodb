@@ -1,10 +1,7 @@
 {% extends 'home/base.html' %}
 
-{% block title %}
-	Nahrát video
-{% endblock %}
-
 {% block content %}
+	<h2>{% block title %}Nahrát video{% endblock %}</h2>
 	<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ uploadform }}

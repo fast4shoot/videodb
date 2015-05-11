@@ -26,11 +26,11 @@
 					<div id="left">
 						<h3> Hlavní menu </h3>
 						<ul>
-							<li><a href="{% url 'index' %}">Domů</a></li>
+							<li><a href="{% url 'index' %}">Videa</a></li>
 							<li><a href="{% url 'tags' %}">Tagy</a></li>
 							{% if user.is_authenticated %}
 								<li><a href="{% url 'upload' %}">Nahrát video</a></li>
-								<li><a href="{% url 'upload' %}">Můj profil</a></li>
+								<li><a href="{% url 'profile' user.id %}">Můj profil</a></li>
 								<li><a href="{% url 'logout' %}">Odhlásit</a></li>
 							{% else %}
 								<li><a href="{% url 'login' %}">Přihlásit</a></li>
@@ -38,6 +38,13 @@
 						</ul>
 					</div>
 					<div id="text">
+						{% if messages %}
+							<ul class="messages">
+								{% for message in messages %}
+									<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
 						{% block content %}{% endblock %}
 					</div>
 					<div id="footer">
