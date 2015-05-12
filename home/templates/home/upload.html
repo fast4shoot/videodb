@@ -4,7 +4,9 @@
 	<h2>{% block title %}Nahrát video{% endblock %}</h2>
 	<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ uploadform }}
-		<input name="upload" type="submit" value="Nahrát" />
+		<table>
+			{{ uploadform }}
+			<tr><td colspan='2'><input name="upload" type="submit" value="Nahrát" /></td></tr>
+		</table>
 	</form>
 {% endblock %}
