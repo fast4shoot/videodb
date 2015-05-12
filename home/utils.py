@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import tempfile, shutil, os
 def create_temporary_copy(path):
 	temp_dir = tempfile.gettempdir()

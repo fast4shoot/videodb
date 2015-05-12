@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from . import forms
 
 def searchform(request):
