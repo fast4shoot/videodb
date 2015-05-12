@@ -23,7 +23,7 @@ def search(request):
 	searchform = forms.SearchForm(request.GET)
 	if searchform.is_valid():
 		term = searchform.cleaned_data['term']
-		videos = models.Video.objects.filter(name__icontains = term)
+		videos = models.Video.objects.filter(name__icontains = term).filter(state = models.Video.PROCESSED)
 		context = {"videos": videos}
 	else:
 		context = {}
