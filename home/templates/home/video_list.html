@@ -1,9 +1,20 @@
+{% load staticfiles %}
+
 {% if video_list %}
 	<ul class="video-list">
 		{% for video in video_list %}
 			<li>
-				<a href="{% url 'video' video.id %}"><img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/></a>
-				<div class="video-name"><a href="{% url 'video' video.id %}">{{ video.name }}</a></div>
+				{% if video.is_processed %}
+					<a href="{% url 'video' video.id %}"><img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/></a>
+					<div class="video-name"><a href="{% url 'video' video.id %}">{{ video.name }}</a></div>
+				{% else %}
+					{% if video.has_thumbnails %}
+						<img src="{{ video.get_thumbnail_urls.0 }}" alt="{{ video.name }}"/>
+					{% else %}
+						<img src="{% static 'img/nomedia.png' %}" alt="{{ video.name }}"/>
+					{% endif %}
+					<div class="video-name">{{ video.name }}</div>
+				{% endif %}
 				<div class="video-description">{{ video.description }}</div>
 				<div class="video-author">{{ video.datetime }} nahrál <a href="{% url 'profile' video.user.id %}">{{ video.user.username }}</a></div>
 				<div class="video-tags">{% include 'home/tag_list.html' with tag_list=video.tags.all %}</div>
