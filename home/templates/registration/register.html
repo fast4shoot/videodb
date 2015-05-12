@@ -22,9 +22,10 @@
 	<td>{{ form.password }}</td>
 	{% if form.password.errors %}<td>{{ form.password.errors }}</td>{% endif %}
 </tr>
-</table>
-
-<input type="submit" value="Registrovat" />
+<tr>
+	<td colspan='2' align='center'><input type="submit" value="Registrovat" /></td>
+</tr>
+</table>	
 </form>
 
 {% endblock %}
