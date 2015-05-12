@@ -13,7 +13,7 @@ class UploadForm(forms.Form):
 	file = forms.FileField(label='Video')
 
 class CommentForm(forms.Form):
-	comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '4', 'cols': '100'}), min_length = 2)
+	comment = forms.CharField(label='',widget=forms.Textarea(attrs={'rows': '4', 'style': 'width: 100%'}), min_length = 2)
 
 class RegisterForm(forms.Form):
 	username = forms.CharField(max_length = 30, min_length = 1, label = 'Uživatelské jméno')
