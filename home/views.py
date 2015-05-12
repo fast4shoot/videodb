@@ -155,7 +155,7 @@ def process_video(path, video_id):
 		set_video_state(video_id, models.Video.PREPROCESSED, duration)
 		
 		finalpath = os.path.join(settings.MEDIA_ROOT, "%d.webm" % video_id)
-		subprocess.check_call(["ffmpeg", "-i", path, "-acodec", "libvorbis", "-aq", "10", "-ac", "2", "-qmax", "10", finalpath])
+		subprocess.check_call(["ffmpeg", "-i", path, "-acodec", "vorbis", "-aq", "10", "-ac", "2", "-qmax", "10", finalpath])
 		os.remove(path)
 		
 		set_video_state(video_id, models.Video.PROCESSED)
