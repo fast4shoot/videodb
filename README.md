@@ -7,13 +7,15 @@
 	* Josef Řídký, xridky00
 * Datum vypracování: 12. 05. 2015
 
+***
+
 ## Zadání
 
 Vytvořte webové rozhraní pro sdílení souborů s videozáznamy. Rozhraní by mělo umožnit třídění souborů podle kategorií, zobrazení náhledů a případně dalších informací o nahrávkách. Aplikace by měla mít dvě varianty rozhraní, jedno pro administraci a druhé pro prohlížení/stahování záznamů.
 
 ## Řešení
 
-Aplikace je koncipována jako webová aplikace podobná známé službě YouTube. Pro implementaci byl zvolen framework Django. Pro zpracování video souborů byly zvoleny nástroje `ffmpeg` a `ffprobe`.
+Projekt je koncipován jako webová aplikace podobná známé službě YouTube. Pro implementaci byl zvolen framework Django. Pro zpracování video souborů byly zvoleny nástroje `ffmpeg` a `ffprobe`.
 
 ### Schopnosti aplikace
 
@@ -28,16 +30,16 @@ Aplikace obsahuje následující funkcionalitu:
 * Komentování videí
 * Prohlížení profilů uživatelů (tj. nahraných videí a komentářů)
 
-Administrační rozhraní pak používá vestavěnou administrační funkcionalitu frameworku Django a umožňuje libovolnou manipulaci s objekty videí, tagů a komentářů.
+Administrační rozhraní pak používá vestavěnou administrační funkcionalitu frameworku Django a&nbsp;umožňuje libovolnou manipulaci s&nbsp;objekty videí, tagů a&nbsp;komentářů.
 
 ### Zpracování nahraných videí
 
-Aby bylo možné videa prezentovat v jednotné formě, přehrávat je na široké škále webových prohlížečů a nemít je založené na licenčně zatížených kodecích, tak jsou všechna nahraná videa nejprve zpracována.
+Aby bylo možné videa prezentovat v jednotné formě, přehrávat je na široké škále webových prohlížečů a nemít je založené na licenčně zatížených kodecích, tak jsou všechna nahraná videa nejprve zpracována  pomocí nástrojů `ffmpeg` a `ffprobe`. 
 
-Toto zpracování je prováděno pomocí nástrojů `ffmpeg` a `ffprobe`. Toto zpracování má tři cíle:
+Toto zpracování má tři cíle:
 * Dekódování informací o nahraném souboru (tj. zda se vůbec jedná o video a jak je dlouhé) - k tomuto účelu je použit nástroj `ffprobe` s JSON výstupem, který je následně přečten aplikací.
-* Vygenerování náhledů pro video - k tomuto účelu je použit parametr `-vframes` nástroje `ffmpeg`. Náhledy jsou v současnosti generovány tři, postupně v prvné, druhé a třetí čtvrtině nahraného videa. Aplikace ovšem v současnosti využívá pouze prvního náhledu. Další dva jsou dostupné pro budoucí rozšíření (například pro volbu zobrazovaného náhledu uživatelem).
-* Překódování videa do formátu WebM - překódování je opět provedeno nástrojem `ffmpeg`. Parametry kvality byly experimentálně zvoleny tak, aby videa neztrácela příliš na kvalitě a přitom bylo možné je bez obtíží přenášet přes počítačové sítě.
+* Vygenerování náhledů pro video - k tomuto účelu je použit parametr `-vframes` nástroje `ffmpeg`. Náhledy jsou v současnosti generovány tři, postupně v první, druhé a třetí čtvrtině nahraného videa. Aplikace ovšem v současnosti využívá pouze prvního náhledu. Další dva jsou dostupné pro budoucí rozšíření (například pro volbu zobrazovaného náhledu uživatelem).
+* Překódování videa do formátu WebM - překódování je opět provedeno nástrojem `ffmpeg`. Parametry kvality byly experimentálně zvoleny tak, aby videa neztrácela příliš na kvalitě a přitom bylo možné je bez obtíží přenášet po počítačových sítích.
 
 ## Postup instalace
 
@@ -58,8 +60,18 @@ Pokud na cílovém stroji není nainstalován framework Django a není možné j
 
 ## Spuštění aplikace
 
-Pro spuštění vestavěného web serveru lze použít příkaz:
+Pro spuštění vestavěného webového serveru lze použít příkaz:
 
     $ python manage.py runserver <ip>:<port>
 
 Pro přístup k aplikaci z libovolného počítače je možné použít IP 0.0.0.0.
+
+Hlavní aplikace je po spuštění serveru dostupná na URL `http://<server>:<port>/` a administrační rozhraní je dostupné na URL `http://<server>:<port>/admin/`.
+
+## Použité zdroje
+
+Django documentation. *Django*. [online]. [cit. 2015-05-12]. Dostupné z: *https://docs.djangoproject.com/en/1.8/*
+
+ffmpeg Documentation. *FFmpeg*. [online]. [cit. 2015-05-12]. Dostupné z: *https://ffmpeg.org/ffmpeg.html*
+
+W3Schools Online Web Tutorials. *w3schools.com*. [online]. [cit. 2015-05-12]. Dostupné z: *http://www.w3schools.com/*
