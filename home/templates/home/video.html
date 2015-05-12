@@ -11,7 +11,7 @@
 			{% csrf_token %}
 			{{ editform.name }}
 	{% else %}
-		<h2 class="video-video-name">{{ video.name }}</h2>
+		<h2>{{ video.name }}</h2>
 	{% endif %}
 	<video width="720" height="405" controls>
 		<source src="{{ video.get_video_url }}" type="video/webm">
@@ -19,7 +19,7 @@
 	</video> 
 	{% if user == video.user %}
 			{{ editform.description }}<br/>
-			<input type="submit" value="Uložit změny"/>
+			<input type="submit" class='cbutton' value="Uložit změny"/>
 		</form>
 	{% else %}
 		{{ video.description|comment_paragraphs }}
