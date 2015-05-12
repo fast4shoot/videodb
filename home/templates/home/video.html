@@ -1,23 +1,37 @@
 {% extends 'home/base.html' %}
+{% load comment_paragraphs %}
 
 {% block title %}
 	{{ video.name }}
 {% endblock %}
 
 {% block content %}
-	<h2>{{ video.name }}</h2>
-	 <video width="720" height="405" controls>
+	{% if user == video.user %}
+		<form action="{% url 'edit_video' video.id %}" method="post">
+			{% csrf_token %}
+			{{ editform.name }}
+	{% else %}
+		<h2 class="video-video-name">{{ video.name }}</h2>
+	{% endif %}
+	<video width="720" height="405" controls>
 		<source src="{{ video.get_video_url }}" type="video/webm">
 		Váš prohlížeč bohužel nepodporuje přehrávání videí.
 	</video> 
-	<p>{{ video.description }}</p>
+	{% if user == video.user %}
+			{{ editform.description }}<br/>
+			<input type="submit" value="Uložit změny"/>
+		</form>
+	{% else %}
+		{{ video.description|comment_paragraphs }}
+	{% endif %}
+	
 	<p>{{ video.datetime }} nahrál <a href="{% url 'profile' video.user.id %}">{{ video.user.username }}</a></p>
 	<h3>Tagy</h3>
 	{% include 'home/tag_list.html' with tag_list=tags %}
 	
 	{% if user.is_authenticated %}
 	<h3>Komentovat</h3>
-	<form action="{% url 'video' video.id %}" method="post">
+	<form action="{% url 'post_comment' video.id %}" method="post">
 		{% csrf_token %}
 		{{ commentform }}
 		<input type="submit" value="Komentovat"/>

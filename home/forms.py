@@ -16,6 +16,10 @@ class CommentForm(forms.Form):
 	comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '4', 'cols': '100'}), min_length = 2)
 
 class RegisterForm(forms.Form):
-	username = forms.CharField(max_length = 30, min_length = 1)
-	email = forms.EmailField()
-	password = forms.CharField()
+	username = forms.CharField(max_length = 30, min_length = 1, label = 'Uživatelské jméno')
+	email = forms.EmailField(label = 'E-mail')
+	password = forms.CharField(label = '')
+
+class VideoEditForm(forms.Form):
+	name = forms.CharField(max_length = 256, label='Název videa')
+	description = forms.CharField(widget=forms.Textarea(attrs={'rows': '6', 'cols': '60'}), label='Popis videa')
