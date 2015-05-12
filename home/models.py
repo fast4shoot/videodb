@@ -5,11 +5,18 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 class Tag(models.Model):
-	name = models.CharField(max_length = 256, primary_key = True)
-	description = models.TextField(null = True)
+	name = models.CharField(max_length = 256, primary_key = True, verbose_name = "název")
+	description = models.TextField(null = True, verbose_name = "popis")
 	
 	def __str__(self):
 		return self.name
+	
+	def __unicode__(self):
+		return self.name
+		
+	class Meta:
+		verbose_name = "Tag"
+		verbose_name_plural = "Tagy"
 
 class Video(models.Model):
 	UPLOADED = "0"
@@ -23,14 +30,13 @@ class Video(models.Model):
 		(PROCESSING_ERROR, "Chyba zpracování"),
 	)
 
-	user = models.ForeignKey(User, related_name = "videos", related_query_name = "video")
-	name = models.CharField(max_length = 256)
-	description = models.TextField()
-	tags = models.ManyToManyField(Tag, related_name = "videos", related_query_name = "video")
-	upvotes = models.IntegerField(default = 0)
-	state = models.CharField(max_length = 1, choices = STATE_CHOICES, default = UPLOADED)
-	duration = models.IntegerField(null = True)
-	datetime = models.DateTimeField(auto_now_add = True)
+	user = models.ForeignKey(User, related_name = "videos", related_query_name = "video", verbose_name = "uživatel")
+	name = models.CharField(max_length = 256, verbose_name = "název")
+	description = models.TextField(verbose_name = "popis")
+	tags = models.ManyToManyField(Tag, related_name = "videos", related_query_name = "video", verbose_name = "tagy")
+	state = models.CharField(max_length = 1, choices = STATE_CHOICES, default = UPLOADED, verbose_name = "stav")
+	duration = models.IntegerField(null = True, verbose_name = "trvání")
+	datetime = models.DateTimeField(auto_now_add = True, verbose_name = "datum nahrání")
 	
 	def get_video_url(self):
 		return settings.MEDIA_URL + "%d.webm" % self.id
@@ -43,11 +49,26 @@ class Video(models.Model):
 	
 	def has_thumbnails(self):
 		return self.state == Video.PREPROCESSED or self.state == Video.PROCESSED
+	
+	def __str__(self):
+		return self.name
+	
+	def __unicode__(self):
+		return self.name
+	
+	class Meta:
+		verbose_name = "Video"
+		verbose_name_plural = "Videa"
+		ordering = ["-datetime"]
 
 
 class Comment(models.Model):
-	user = models.ForeignKey(User, related_name = "comments", related_query_name = "comment")
-	video = models.ForeignKey(Video, related_name = "comments", related_query_name = "comment")
-	text = models.TextField()
-	upvotes = models.IntegerField(default = 0)
-	datetime = models.DateTimeField(auto_now_add = True)
+	user = models.ForeignKey(User, related_name = "comments", related_query_name = "comment", verbose_name = "uživatel")
+	video = models.ForeignKey(Video, related_name = "comments", related_query_name = "comment", verbose_name = "video")
+	text = models.TextField(verbose_name = "komentář")
+	datetime = models.DateTimeField(auto_now_add = True, verbose_name = "datum")
+	
+	class Meta:
+		verbose_name = "Komentář"
+		verbose_name_plural = "Komentáře"
+		ordering = ["-datetime"]

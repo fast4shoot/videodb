@@ -15,7 +15,7 @@ import threading
 import json
 
 def index(request):
-	videos = models.Video.objects.filter(state = models.Video.PROCESSED).order_by("-datetime")
+	videos = models.Video.objects.filter(state = models.Video.PROCESSED)
 	context = {"videos": videos,}
 	return render(request, "home/index.html", context)
 
@@ -80,7 +80,7 @@ def video(request, video_id):
 	
 	context = {
 		"video": video,
-		"comments": video.comments.order_by("-datetime"),
+		"comments": video.comments.all(),
 		"tags": video.tags.all(),
 		"commentform": commentform,
 		"editform": editform
@@ -104,7 +104,7 @@ def post_comment(request, video_id):
 		
 		context = {
 			"video": video,
-			"comments": video.comments.order_by("-datetime"),
+			"comments": video.comments.all(),
 			"tags": video.tags.all(),
 			"commentform": commentform,
 			"editform": editform
@@ -132,7 +132,7 @@ def edit_video(request, video_id):
 		
 		context = {
 			"video": video,
-			"comments": video.comments.order_by("-datetime"),
+			"comments": video.comments.all(),
 			"tags": video.tags.all(),
 			"commentform": commentform,
 			"editform": editform
@@ -150,7 +150,7 @@ def tag(request, tag_name):
 	tag = get_object_or_404(models.Tag, name = tag_name)
 	context = {
 		"tag": tag,
-		"videos": tag.videos.filter(state = models.Video.PROCESSED).order_by("-datetime"),
+		"videos": tag.videos.filter(state = models.Video.PROCESSED),
 	}
 	return render(request, "home/tag.html", context)
 
@@ -158,8 +158,8 @@ def profile(request, user_id):
 	user = get_object_or_404(auth.models.User, pk = user_id)
 	context = {
 		"profile": user,
-		"videos": user.videos.order_by("-datetime"),
-		"comments": user.comments.order_by("-datetime")[:50]
+		"videos": user.videos.all(),
+		"comments": user.comments.all()[:50]
 	}
 	return render(request, "home/profile.html", context)
 
