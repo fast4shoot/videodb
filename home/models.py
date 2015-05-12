@@ -38,6 +38,9 @@ class Video(models.Model):
 	
 	def is_processed(self):
 		return self.state == Video.PROCESSED
+	
+	def has_thumbnails(self):
+		return self.state == Video.PREPROCESSED or self.state == Video.PROCESSED
 
 
 class Comment(models.Model):
