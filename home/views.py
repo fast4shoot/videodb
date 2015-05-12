@@ -15,6 +15,9 @@ import threading
 import json
 
 def index(request):
+	if "logout" in request.GET:
+		messages.info(request, "Byli jste úspěšně odhlášeni.")
+
 	videos = models.Video.objects.filter(state = models.Video.PROCESSED)
 	context = {"videos": videos,}
 	return render(request, "home/index.html", context)

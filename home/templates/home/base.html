@@ -30,7 +30,7 @@
 							{% if user.is_authenticated %}
 								<li><a href="{% url 'upload' %}">Nahrát video</a></li>
 								<li><a href="{% url 'profile' user.id %}">Můj profil</a></li>
-								<li><a href="{% url 'logout' %}">Odhlásit</a></li>
+									<li><a href="{% url 'logout' %}?next=/?logout">Odhlásit</a></li>
 							{% else %}
 								<li><a href="{% url 'login' %}">Přihlásit</a></li>
 								<li><a href="{% url 'register' %}">Registrovat</a></li>
