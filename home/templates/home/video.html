@@ -20,7 +20,7 @@
 	<form action="{% url 'video' video.id %}" method="post">
 		{% csrf_token %}
 		{{ commentform }}
-		<input type="submit" value="Komentovat"/>
+		<input type="submit" value="Přidat komentář"/>
 	</form>
 	{% endif %}
 	

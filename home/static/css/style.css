@@ -75,6 +75,14 @@ a.tag-link:hover {
 	font-weight: bold;
 }
 
+h3{
+	border-bottom: 1px solid #888;
+}
+
+#left h3{
+	border-bottom: none;
+}
+
 #left li:hover{
 	background: #4CB2D3;
 	text-shadow: 0px 0px 1px white;
@@ -100,14 +108,18 @@ a.tag-link:hover {
 .list{
 	margin: 0px;
 	padding: 0px;
-	border-top: 1px solid #888;
+	border-top: 1px solid #DDD;
 }
 
 .list li{
 	height: 50px;
-	border-bottom: 1px solid #888;
+	border-bottom: 1px solid #DDD;
 	padding: 10px 10px;
 	list-style: none;
+}
+
+.list li:nth-child(2n){
+	background: #EFF8FB;
 }
 
 .video-list{
@@ -146,6 +158,42 @@ a.tag-link:hover {
 .video-list li .video-tags {
 	margin: 10px 0 10px 0;
 }
+
+.errorlist, .message{
+	padding: 0px;
+}
+
+li.error, .errorlist li{
+	list-style: none;
+	background: #FEE5E5;
+	text-align: center;
+	padding: 4px 6px;
+	border: 1px solid #F00;
+}
+
+li.info{
+	list-style: none;
+	background: #FFF1C6;
+	text-align: center;
+	padding: 4px 6px;
+	border: 1px solid #FFC514;
+}
+
+table{
+	margin: 0px auto;
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+
+table td, th{
+	padding: 3px 5px;
+	border-left: 1px solid #0091C0;
+}
+
+table td:nth-child(2n), table td[colspan]{
+        border-left: none;
+}
+
 
 #footer{
 	width: 990px;
